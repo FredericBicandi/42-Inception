@@ -5,10 +5,6 @@ DB_PW="$(cat /run/secrets/db_password)"
 ADMIN_PW="$(cat /run/secrets/wp_admin_password)"
 USER_PW="$(cat /run/secrets/wp_user_password)"
 
-until mariadb -hmariadb -u"${MYSQL_USER}" -p"${DB_PW}" -e "SELECT 1" "${MYSQL_DATABASE}" >/dev/null 2>&1; do
-  sleep 1
-done
-
 if [ ! -f /usr/local/bin/wp ]; then
   curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp
   chmod +x /usr/local/bin/wp
@@ -19,7 +15,7 @@ if [ ! -f wp-config.php ]; then
   rm -f /var/www/html/index.nginx-debian.html || true
   # if volume got seeded, clear it
   rm -rf /var/www/html/wp-admin /var/www/html/wp-content /var/www/html/wp-includes /var/www/html/*.php 2>/dev/null || true
-  wp core download --allow-root --force
+  wp core download --allow-root --force --force
 
   wp config create --allow-root \
     --dbname="${MYSQL_DATABASE}" \
