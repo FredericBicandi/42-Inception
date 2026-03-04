@@ -1,4 +1,4 @@
-# inception
+# Inception Of Things
 
 <p align="center">
   <img src="https://github.com/FreddyBicandy50/FreddyBicandy50/blob/main/42_badges/inceptione.png" alt="inception 42 project badge"/>
